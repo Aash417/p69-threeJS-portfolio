@@ -31,7 +31,7 @@ function Clients() {
 								<div className='flex items-center self-end gap-2'>
 									{Array.from({ length: 5 }).map((_, index) => (
 										<img
-											key={index}
+											key={index + 1}
 											src='/assets/star.png'
 											alt='star'
 											className='w-5 h-5'
