@@ -6,10 +6,12 @@ import { useGSAP } from '@gsap/react';
 import { useGLTF, useVideoTexture } from '@react-three/drei';
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
+import * as Three from 'three';
+import { isMesh } from '../constants/helper';
 
-const DemoComputer = (props) => {
-	const group = useRef();
-	const { nodes, materials, animations } = useGLTF('/models/computer.glb');
+function DemoComputer(props: { texture: string }) {
+	const group = useRef<Three.Group>(null!);
+	const { nodes, materials } = useGLTF('/models/computer.glb');
 	// const { actions } = useAnimations(animations, group);
 
 	const txt = useVideoTexture(
@@ -33,18 +35,21 @@ const DemoComputer = (props) => {
 	return (
 		<group ref={group} {...props} dispose={null}>
 			<group name='Scene'>
-				<mesh
-					name='monitor-screen'
-					// castShadow
-					// receiveShadow
-					geometry={nodes['monitor-screen'].geometry}
-					material={nodes['monitor-screen'].material}
-					position={[0.127, 1.831, 0.511]}
-					rotation={[1.571, -0.005, 0.031]}
-					scale={[0.661, 0.608, 0.401]}
-				>
-					<meshBasicMaterial map={txt} toneMapped={false} />
-				</mesh>
+				{isMesh(nodes['monitor-screen']) && (
+					<mesh
+						name='monitor-screen'
+						// castShadow
+						// receiveShadow
+						geometry={nodes['monitor-screen'].geometry}
+						material={nodes['monitor-screen'].material}
+						position={[0.127, 1.831, 0.511]}
+						rotation={[1.571, -0.005, 0.031]}
+						scale={[0.661, 0.608, 0.401]}
+					>
+						<meshBasicMaterial map={txt} toneMapped={false} />
+					</mesh>
+				)}
+
 				<group
 					name='RootNode'
 					position={[0, 1.093, 0]}
@@ -958,67 +963,83 @@ const DemoComputer = (props) => {
 					rotation={[0, -0.033, 0]}
 					scale={[0.042, 0.045, 0.045]}
 				>
-					<mesh
-						name='Monitor-B-_computer_0_1'
-						// castShadow
-						// receiveShadow
-						geometry={nodes['Monitor-B-_computer_0_1'].geometry}
-						material={materials.computer}
-					/>
-					<mesh
-						name='Monitor-B-_computer_0_2'
-						// castShadow
-						// receiveShadow
-						geometry={nodes['Monitor-B-_computer_0_2'].geometry}
-						material={materials.base__0}
-					/>
-					<mesh
-						name='Monitor-B-_computer_0_3'
-						// castShadow
-						// receiveShadow
-						geometry={nodes['Monitor-B-_computer_0_3'].geometry}
-						material={materials.Material_36}
-					/>
-					<mesh
-						name='Monitor-B-_computer_0_4'
-						// castShadow
-						// receiveShadow
-						geometry={nodes['Monitor-B-_computer_0_4'].geometry}
-						material={materials.Material_35}
-					/>
-					<mesh
-						name='Monitor-B-_computer_0_5'
-						// castShadow
-						// receiveShadow
-						geometry={nodes['Monitor-B-_computer_0_5'].geometry}
-						material={materials.Material_34}
-					/>
-					<mesh
-						name='Monitor-B-_computer_0_6'
-						// castShadow
-						// receiveShadow
-						geometry={nodes['Monitor-B-_computer_0_6'].geometry}
-						material={materials.keys}
-					/>
-					<mesh
-						name='Monitor-B-_computer_0_7'
-						// castShadow
-						// receiveShadow
-						geometry={nodes['Monitor-B-_computer_0_7'].geometry}
-						material={materials.keys2}
-					/>
-					<mesh
-						name='Monitor-B-_computer_0_8'
-						// castShadow
-						// receiveShadow
-						geometry={nodes['Monitor-B-_computer_0_8'].geometry}
-						material={materials.Material_37}
-					/>
+					{isMesh(nodes['Monitor-B-_computer_0_1']) && (
+						<mesh
+							name='Monitor-B-_computer_0_1'
+							// castShadow
+							// receiveShadow
+							geometry={nodes['Monitor-B-_computer_0_1'].geometry}
+							material={materials.computer}
+						/>
+					)}
+					{isMesh(nodes['Monitor-B-_computer_0_2']) && (
+						<mesh
+							name='Monitor-B-_computer_0_2'
+							// castShadow
+							// receiveShadow
+							geometry={nodes['Monitor-B-_computer_0_2'].geometry}
+							material={materials.base__0}
+						/>
+					)}
+					{isMesh(nodes['Monitor-B-_computer_0_3']) && (
+						<mesh
+							name='Monitor-B-_computer_0_3'
+							// castShadow
+							// receiveShadow
+							geometry={nodes['Monitor-B-_computer_0_3'].geometry}
+							material={materials.Material_36}
+						/>
+					)}
+					{isMesh(nodes['Monitor-B-_computer_0_4']) && (
+						<mesh
+							name='Monitor-B-_computer_0_4'
+							// castShadow
+							// receiveShadow
+							geometry={nodes['Monitor-B-_computer_0_4'].geometry}
+							material={materials.Material_35}
+						/>
+					)}
+					{isMesh(nodes['Monitor-B-_computer_0_5']) && (
+						<mesh
+							name='Monitor-B-_computer_0_5'
+							// castShadow
+							// receiveShadow
+							geometry={nodes['Monitor-B-_computer_0_5'].geometry}
+							material={materials.Material_34}
+						/>
+					)}
+					{isMesh(nodes['Monitor-B-_computer_0_6']) && (
+						<mesh
+							name='Monitor-B-_computer_0_6'
+							// castShadow
+							// receiveShadow
+							geometry={nodes['Monitor-B-_computer_0_6'].geometry}
+							material={materials.keys}
+						/>
+					)}
+					{isMesh(nodes['Monitor-B-_computer_0_7']) && (
+						<mesh
+							name='Monitor-B-_computer_0_7'
+							// castShadow
+							// receiveShadow
+							geometry={nodes['Monitor-B-_computer_0_7'].geometry}
+							material={materials.keys2}
+						/>
+					)}
+					{isMesh(nodes['Monitor-B-_computer_0_8']) && (
+						<mesh
+							name='Monitor-B-_computer_0_8'
+							// castShadow
+							// receiveShadow
+							geometry={nodes['Monitor-B-_computer_0_8'].geometry}
+							material={materials.Material_37}
+						/>
+					)}
 				</group>
 			</group>
 		</group>
 	);
-};
+}
 
 useGLTF.preload('/models/computer.glb');
 

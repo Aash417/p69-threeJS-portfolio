@@ -2,13 +2,15 @@ import { useGSAP } from '@gsap/react';
 import { Float, useGLTF, useTexture } from '@react-three/drei';
 import gsap from 'gsap';
 import { useRef, useState } from 'react';
+import * as Three from 'three';
+import { isMesh } from '../constants/helper';
 
 function Cube({ ...props }) {
 	const { nodes } = useGLTF('models/cube.glb');
 
 	const texture = useTexture('textures/cube.png');
 
-	const cubeRef = useRef();
+	const cubeRef = useRef<Three.Mesh>(null!);
 	const [hovered, setHovered] = useState(false);
 
 	useGSAP(() => {
@@ -34,16 +36,18 @@ function Cube({ ...props }) {
 				dispose={null}
 				{...props}
 			>
-				<mesh
-					ref={cubeRef}
-					castShadow
-					receiveShadow
-					geometry={nodes.Cube.geometry}
-					material={nodes.Cube.material}
-					onPointerEnter={() => setHovered(true)}
-				>
-					<meshMatcapMaterial matcap={texture} toneMapped={false} />
-				</mesh>
+				{isMesh(nodes.Cube) && (
+					<mesh
+						ref={cubeRef}
+						castShadow
+						receiveShadow
+						geometry={nodes.Cube.geometry}
+						material={nodes.Cube.material}
+						onPointerEnter={() => setHovered(true)}
+					>
+						<meshMatcapMaterial matcap={texture} toneMapped={false} />
+					</mesh>
+				)}
 			</group>
 		</Float>
 	);

@@ -57,7 +57,7 @@ function Projects() {
 					<div className='flex flex-wrap items-center justify-between gap-5'>
 						<div className='flex items-center gap-3'>
 							{currentProject.tags.map((tag, index) => (
-								<div key={index} className='tech-logo'>
+								<div key={index + 1} className='tech-logo'>
 									<img src={tag.path} alt={tag.name} />
 								</div>
 							))}
