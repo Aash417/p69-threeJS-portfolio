@@ -44,6 +44,9 @@ importers:
       three:
         specifier: ^0.168.0
         version: 0.168.0
+      three-stdlib:
+        specifier: ^2.33.0
+        version: 2.33.0(three@0.168.0)
     devDependencies:
       '@eslint/js':
         specifier: ^9.11.0
