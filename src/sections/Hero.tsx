@@ -22,7 +22,7 @@ export default function Hero() {
 	const vector = new Three.Vector3().copy(sizes.targetPosition);
 	return (
 		<section className='relative flex flex-col w-full min-h-screen' id='home'>
-			<div className='flex flex-col w-full gap-3 mx-auto mt-20 sm:mt-36 c-space'>
+			<div className='flex flex-col w-full gap-3 mx-auto mt-20 sm:mt-24 c-space'>
 				<p className='text-xl font-medium text-center text-white sm:text-3xl font-generalsans'>
 					Hi, I am Aashish<span className='waving-hand'>👋</span>
 				</p>
@@ -46,7 +46,7 @@ export default function Hero() {
 
 						<group>
 							<Target position={vector} />
-							<ReactLogo />
+							<ReactLogo position={sizes.reactLogoPosition} />
 							<Rings position={sizes.ringPosition} />
 							<Cube position={sizes.cubePosition} />
 						</group>

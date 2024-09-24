@@ -1,7 +1,7 @@
 import { Float, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-function ReactLogo(): JSX.Element {
+function ReactLogo({ position }: { position: [number, number, number] }): JSX.Element {
 	const { nodes, materials } = useGLTF('models/react.glb') as {
 		nodes: Record<string, THREE.Object3D>;
 		materials: Record<string, THREE.Material | THREE.Material[]>;
@@ -19,7 +19,7 @@ function ReactLogo(): JSX.Element {
 				<mesh
 					geometry={reactLogoNode.geometry}
 					material={materials['Material.002']}
-					position={[0, 0.079, 0.181]}
+					position={position}
 					rotation={[0, 0, -Math.PI / 2]}
 					scale={[0.392, 0.392, 0.527]}
 				/>

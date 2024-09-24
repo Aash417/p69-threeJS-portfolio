@@ -228,43 +228,43 @@ export const myProjects = [
 	},
 ];
 
-export const calculateSizes = (
-	isSmall: boolean,
-	isMobile: boolean,
-	isTablet: boolean
-): {
-	deskScale: number;
-	deskPosition: [number, number, number];
-	cubePosition: [number, number, number];
-	reactLogoPosition: [number, number, number];
-	ringPosition: [number, number, number];
-	targetPosition: Vector3;
-} => {
-	return {
-		deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.065,
-		deskPosition: isMobile ? [0.5, -4.5, 0] : [0.25, -5.5, 0],
-		cubePosition: [
-			isSmall ? 4 : isMobile ? 5 : isTablet ? 5 : 9,
-			isSmall ? -5 : isMobile ? -5 : isTablet ? -5 : -5.5,
-			0,
-		],
-		reactLogoPosition: [
-			isSmall ? 3 : isMobile ? 5 : isTablet ? 5 : 12,
-			isSmall ? 4 : 4,
-			0,
-		],
-		ringPosition: [
-			isSmall ? -5 : isMobile ? -10 : isTablet ? -12 : -24,
-			isSmall ? 7 : 10,
-			0,
-		],
-		targetPosition: new Vector3(
-			isSmall ? -5 : isMobile ? -9 : isTablet ? -11 : -13,
-			isSmall ? -10 : isMobile ? -10 : isTablet ? -7 : -13,
-			-10
-		),
-	};
-};
+// export const calculateSizes = (
+// 	isSmall: boolean,
+// 	isMobile: boolean,
+// 	isTablet: boolean
+// ): {
+// 	deskScale: number;
+// 	deskPosition: [number, number, number];
+// 	cubePosition: [number, number, number];
+// 	reactLogoPosition: [number, number, number];
+// 	ringPosition: [number, number, number];
+// 	targetPosition: Vector3;
+// } => {
+// 	return {
+// 		deskScale: isSmall ? 0.05 : isMobile ? 0.06 : 0.065,
+// 		deskPosition: isMobile ? [0.5, -4.5, 0] : [0.25, -5.5, 0],
+// 		cubePosition: [
+// 			isSmall ? 4 : isMobile ? 5 : isTablet ? 5 : 9,
+// 			isSmall ? -5 : isMobile ? -5 : isTablet ? -5 : -5.5,
+// 			0,
+// 		],
+// 		reactLogoPosition: [
+// 			isSmall ? 3 : isMobile ? 5 : isTablet ? 5 : 12,
+// 			isSmall ? 4 : 4,
+// 			0,
+// 		],
+// 		ringPosition: [
+// 			isSmall ? -5 : isMobile ? -10 : isTablet ? -12 : -24,
+// 			isSmall ? 7 : 10,
+// 			0,
+// 		],
+// 		targetPosition: new Vector3(
+// 			isSmall ? -5 : isMobile ? -9 : isTablet ? -11 : -13,
+// 			isSmall ? -10 : isMobile ? -10 : isTablet ? -7 : -13,
+// 			-10
+// 		),
+// 	};
+// };
 
 export const workExperiences = [
 	{
@@ -295,3 +295,59 @@ export const workExperiences = [
 		animation: 'salute',
 	},
 ];
+
+export const calculateSizes = (
+	isSmall: boolean,
+	isMobile: boolean,
+	isTablet: boolean
+): {
+	deskScale: number;
+	deskPosition: [number, number, number];
+	cubePosition: [number, number, number];
+	reactLogoPosition: [number, number, number];
+	ringPosition: [number, number, number];
+	targetPosition: Vector3;
+} => {
+	const getDeskScale = () => {
+		if (isSmall) return 0.05;
+		if (isMobile) return 0.06;
+		return 0.11;
+	};
+
+	const getDeskPosition = ():[number, number, number] => {
+		return isMobile ? [0.5, -4.5, 0] : [0.25, -9, 0];
+	};
+
+	const getCubePosition = ():[number, number, number] => {
+		const x = isSmall ? 4 : isMobile || isTablet ? 5 : 11;
+		const y = isSmall || isMobile || isTablet ? -5 : -5.5;
+		return [x, y, 0];
+	};
+
+	const getReactLogoPosition = () :[number, number, number]=> {
+		const x = isSmall ? 3 : isMobile || isTablet ? 5 : 19;
+		const y = 4; // Same for all cases
+		return [x, y, 0];
+	};
+
+	const getRingPosition = () :[number, number, number] => {
+		const x = isSmall ? -5 : isMobile ? -10 : isTablet ? -12 : -26;
+		const y = isSmall ? 7 : 17;
+		return [x, y, 0];
+	};
+
+	const getTargetPosition = () => {
+		const x = isSmall ? -5 : isMobile ? -9 : isTablet ? -11 : -19;
+		const y = isSmall || isMobile ? -10 : isTablet ? -7 : -13;
+		return new Vector3(x, y, -10);
+	};
+
+	return {
+		deskScale: getDeskScale(),
+		deskPosition: getDeskPosition(),
+		cubePosition: getCubePosition(),
+		reactLogoPosition: getReactLogoPosition(),
+		ringPosition: getRingPosition(),
+		targetPosition: getTargetPosition(),
+	};
+};
